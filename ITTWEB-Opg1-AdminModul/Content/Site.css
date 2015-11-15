@@ -17,33 +17,48 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
+input, select, textarea {
     max-width: 280px;
 }
 
-
-/* make sidebar nav vertical */ 
+/* Large screen css */ 
 @media (min-width: 768px) {
-  .sidebar-nav .navbar .navbar-collapse {
-    padding: 0;
-    max-height: none;
-  }
-  .sidebar-nav .navbar ul {
-    float: none;
-  }
-  .sidebar-nav .navbar :not(ul) {
-    display: block;
-  }
-  .sidebar-nav .navbar li {
-    float: none;
-    display: block;
-  }
-  .sidebar-nav .navbar li a {
-    padding-top: 12px;
-    padding-bottom: 12px;
-  }
+    .sidebar-nav .navbar .navbar-collapse {
+        padding: 0;
+        max-height: none;
+    }
+
+    .sidebar-nav .navbar ul {
+        float: none;
+    }
+
+    /*.sidebar-nav .navbar :not(ul) {
+        display: block;
+    }*/
+    
+    .sidebar-nav .navbar li {
+        float: none;
+        display: block;
+    }
+
+    .sidebar-nav .navbar li a {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .navbar-left-header {
+        display: none;
+    }
+
+    .sidebar-nav {
+        padding-left: 20px;
+        padding-top: 20px;
+    }
+
+    .body-container {
+        padding-top: 20px;
+        padding-right: 20px;
+    }
 }
 
 .ComponentTypeImage {
