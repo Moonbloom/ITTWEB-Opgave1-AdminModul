@@ -1,5 +1,57 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿
+@model List<ITTWEB_Opg1_AdminModul.Models.ComponentType>
+
+    @{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewBag.Title = "Komponenter";
+    }
 
 
+
+    <div class="jumbotron">
+        <h2>Komponenter typer</h2>
+    </div>
+
+    <div class="col-sm-3">
+        <p>
+            <b>Tilføj ny type:</b>
+            <a href="https://www.google.com/search?q=tilf%C3%B8j&ie=utf-8&oe=utf-8">ADD</a>
+        </p>
+
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Billede</th>
+                <th>Navn</th>
+                <th>Info</th>
+                <th>Kategori</th>
+                <th>Datasheet</th>
+                <th>Manufacturer</th>
+                <th>Antal</th>
+            </tr>
+
+        </thead>
+        <tbody>
+
+            @{
+                foreach (var component in Model)
+                {
+                    <tr>
+                        <td>
+                           <img class="ComponentTypeImage" src="@component.LocalImageUrl" />
+                        </td>
+                        <td>@component.ComponentName</td>
+                        <td>@component.ComponentInfo</td>   
+                        <td>@component.Category.CategoryName</td>
+                        <td><a href="@component.Datasheet"/>LINK</td>
+                        <td><a href="@component.ManufacturerLink"/>LINK</td>
+                        <td>//TOTO link til search i komponenter</td>
+                        <td><a href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8">EDIT</a></td>
+                        <td><a href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8#q=remove">REMOVE</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>

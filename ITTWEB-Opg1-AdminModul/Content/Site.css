@@ -60,3 +60,12 @@ input, select, textarea {
         padding-right: 20px;
     }
 }
+
+.ComponentTypeImage {
+    height: 77px;
+    width: 77px;
+}
+
+td {
+    vertical-align: middle;
+}
