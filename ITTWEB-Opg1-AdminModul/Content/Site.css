@@ -85,6 +85,14 @@ td {
     vertical-align: middle;
 }
 
+.email-is-send {
+    color: red;
+}
+
+.email-is-not-send {
+    color: limegreen;
+}
+
 .component-edit {
     color: #16A085;
 }

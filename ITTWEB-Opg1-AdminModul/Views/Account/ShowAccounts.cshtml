@@ -1,12 +1,14 @@
-﻿@model List<ITTWEB_Opg1_AdminModul.Models.Student>
+﻿@using ITTWEB_Opg1_AdminModul.Models
+@model List<ITTWEB_Opg1_AdminModul.Models.ApplicationUser>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Komponenter";
+    ViewBag.Title = "Accounts";
 }
 
+
 <div>
-    <h2>Studernede</h2>
+    <h2>Accounts</h2>
 </div>
 
 <div class="add-wrapper">
@@ -19,21 +21,17 @@
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Navn</th>
-                <th>Mobil nummer</th>
-                <th>Email</th>
+                <th>Brugernavn</th>
+                <th>Roller</th>
             </tr>
         </thead>
         <tbody>
             @{
-                foreach (var stud in Model)
+                foreach (ApplicationUser user in Model)
                 {
                     <tr>
-                        <td>@stud.StudentId</td>
-                        <td>@stud.StudentName</td>
-                        <td>@stud.MobilNo</td>
-                        <td>@stud.Email</td>
+                        <td>@user.UserName</td>
+                        <td>User, Admin</td>
                         <td><a class="component-edit" href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8">Edit</a></td>
                         <td><a class="component-remove" href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8#q=remove">Remove</a></td>
                     </tr>
@@ -42,3 +40,4 @@
         </tbody>
     </table>
 </div>
+

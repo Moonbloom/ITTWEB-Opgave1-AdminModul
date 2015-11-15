@@ -180,6 +180,7 @@
     <Compile Include="Controllers\LoanController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DAL\ComponentManager.cs" />
     <Compile Include="DBUpdater.cs" />
@@ -284,6 +285,7 @@
     <Content Include="Views\Reservation\Index.cshtml" />
     <Content Include="Views\Loan\Index.cshtml" />
     <Content Include="Views\Componenttype\Index.cshtml" />
+    <Content Include="Views\Account\ShowAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

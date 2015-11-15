@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -14,6 +16,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly ApplicationDbContext _usersContext = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -478,5 +481,14 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
             }
         }
         #endregion
+
+        public ActionResult ShowAccounts()
+        {
+          List<ApplicationUser> users = _usersContext.Users.ToList();
+          return View(users);
+        }
+
     }
+
+
 }
