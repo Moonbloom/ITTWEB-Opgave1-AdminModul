@@ -5,52 +5,53 @@
     ViewBag.Title = "Udlån";
 }
 
-<div class="jumbotron">
+<div >
     <h2>Udlån</h2>
 </div>
 
-<div class="col-sm-3">
+<div class="add-wrapper">
     <p>
-        <b>Tilføj ny udlån:</b>
-        <a href="https://www.google.com/search?q=tilf%C3%B8j&ie=utf-8&oe=utf-8">ADD</a>
+        <a href="https://www.google.com/search?q=tilf%C3%B8j&ie=utf-8&oe=utf-8">Add</a>
     </p>
-
 </div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Komponent</th>
-            <th>Stud ID</th>
-            <th>Stud Navn</th>
-            <th>Udlåns dato</th>
-            <th>Indleverings dato</th>
-            <th>Email</th>
-            
-        </tr>
 
-    </thead>
-    <tbody>
+<div class="div-table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Komponent</th>
+                <th>Stud ID</th>
+                <th>Stud Navn</th>
+                <th>Udlåns dato</th>
+                <th>Indleverings dato</th>
+                <th>Email</th>
 
-        @{
-            foreach (var loan in Model)
-            {
-                <tr>
-                    <td>@loan.Component.ComponentType.ComponentName</td>
-                    <td>@loan.Student.StudentId</td>
-                    <td>@loan.Student.StudentName</td>
-                    <td>@loan.LoanDate</td>
-                    <td>@loan.ReturnDate</td>
-                    <td>
-                        <p> 
-                            <a class="@(loan.IsEmailSend ? "email-is-send" : "email-is-not-send")" href="https://www.youtube.com/watch?v=nXRRmbJ7aBI">Send Email</a>
-                        </p>
-                        
-                    </td>
-                    <td><a href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8">EDIT</a></td>
-                    <td><a href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8#q=remove">REMOVE</a></td>
-                </tr>
+            </tr>
+
+        </thead>
+        <tbody>
+
+            @{
+                foreach (var loan in Model)
+                {
+                    <tr>
+                        <td>@loan.Component.ComponentType.ComponentName</td>
+                        <td>@loan.Student.StudentId</td>
+                        <td>@loan.Student.StudentName</td>
+                        <td>@loan.LoanDate</td>
+                        <td>@loan.ReturnDate</td>
+                        <td>
+                            <p>
+                                <a class="@(loan.IsEmailSend ? "email-is-send" : "email-is-not-send")" href="https://www.youtube.com/watch?v=nXRRmbJ7aBI">Send Email</a>
+                            </p>
+
+                        </td>
+                        <td><a class="component-edit" href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8">Edit</a></td>
+                        <td><a class="component-remove" href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8#q=remove">Remove</a></td>
+                    </tr>
+                }
             }
-        }
-    </tbody>
+        </tbody>
 
-</table>
+    </table>
+</div>

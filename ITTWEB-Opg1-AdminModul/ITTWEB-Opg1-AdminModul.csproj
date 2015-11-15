@@ -283,7 +283,7 @@
     <Content Include="Views\Reservation\Index.cshtml" />
     <Content Include="Views\Loan\Index.cshtml" />
     <Content Include="Views\Componenttype\Index.cshtml" />
-    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Account\ShowAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
