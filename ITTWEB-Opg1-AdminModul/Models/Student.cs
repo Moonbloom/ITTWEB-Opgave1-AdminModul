@@ -9,6 +9,7 @@ namespace ITTWEB_Opg1_AdminModul.Models
         public String MobilNo { get; set; }
         public String StudentId { get; set; }
         public String StudentName { get; set; }
+        public String Email { get; set; }
 
         public int LoanInformationId { get; set; }
         public virtual IEnumerable<LoanInformation> LoanInformations { get; set; }
