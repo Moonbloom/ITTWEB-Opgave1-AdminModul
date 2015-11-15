@@ -10,7 +10,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
     public ActionResult Index()
     {
         var testData = new List<LoanInformation>();
-      testData.Add(new LoanInformation(
+      testData.Add(new LoanInformation()
       {
        Component = new Component(){ComponentType = new ComponentType(){ComponentName = "Kat"}},
        Id = 1,

@@ -13,7 +13,6 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         MobilNo = "666",
         StudentName = "Poul",
         StudentId = "1",
-        
       };
       return View(testData);
     }
