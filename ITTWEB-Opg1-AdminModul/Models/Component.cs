@@ -10,7 +10,7 @@
 
         public int ComponentTypeId { get; set; }
         public virtual ComponentType ComponentType { get; set; }
-        public int LoanInformationId { get; set; }
+        public int? LoanInformationId { get; set; }
         public virtual LoanInformation LoanInformation { get; set; }
     }
 }

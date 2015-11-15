@@ -20,7 +20,7 @@ namespace ITTWEB_Opg1_AdminModul.DAL
         {
             using (var db = new EsDbContext())
             {
-                var result = db.Components.ToList();
+                var result = db.Components.Include("ComponentType").ToList();
                 return result;
             }
         } 
