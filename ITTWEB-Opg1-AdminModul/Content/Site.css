@@ -61,11 +61,42 @@ input, select, textarea {
     }
 }
 
-.ComponentTypeImage {
+@media (max-width: 768px) {
+    .div-table {
+        overflow: scroll;
+        margin-top: 60px;
+    }
+}
+
+.body-container {
+    padding-left: 15px;
+}
+
+.add-wrapper {
+    float: right;
+}
+
+.component-type-image {
     height: 77px;
     width: 77px;
 }
 
 td {
     vertical-align: middle;
+}
+
+.component-edit {
+    color: #16A085;
+}
+
+.component-edit:hover {
+    color: #5FA085;
+}
+
+.component-remove {
+    color: #E00000;
+}
+
+.component-remove:hover {
+    color: #FF0000;
 }
