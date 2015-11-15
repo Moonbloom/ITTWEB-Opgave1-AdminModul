@@ -45,3 +45,12 @@ textarea {
     padding-bottom: 12px;
   }
 }
+
+.ComponentTypeImage {
+    height: 77px;
+    width: 77px;
+}
+
+td {
+    vert-align: middle;
+}
