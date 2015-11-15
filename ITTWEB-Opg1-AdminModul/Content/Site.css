@@ -69,3 +69,11 @@ input, select, textarea {
 td {
     vertical-align: middle;
 }
+
+.email-is-send {
+    color: red;
+}
+
+.email-is-not-send {
+    color: lime;
+}
