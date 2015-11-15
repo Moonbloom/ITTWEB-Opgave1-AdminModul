@@ -200,12 +200,37 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\flat\flat-ui.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\lato\lato-black.svg" />
+    <Content Include="Content\fonts\lato\lato-bold.svg" />
+    <Content Include="Content\fonts\lato\lato-bolditalic.svg" />
+    <Content Include="Content\fonts\lato\lato-italic.svg" />
+    <Content Include="Content\fonts\lato\lato-light.svg" />
+    <Content Include="Content\fonts\lato\lato-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\fonts\lato\lato-black.eot" />
+    <Content Include="Content\fonts\lato\lato-black.ttf" />
+    <Content Include="Content\fonts\lato\lato-black.woff" />
+    <Content Include="Content\fonts\lato\lato-bold.eot" />
+    <Content Include="Content\fonts\lato\lato-bold.ttf" />
+    <Content Include="Content\fonts\lato\lato-bold.woff" />
+    <Content Include="Content\fonts\lato\lato-bolditalic.eot" />
+    <Content Include="Content\fonts\lato\lato-bolditalic.ttf" />
+    <Content Include="Content\fonts\lato\lato-bolditalic.woff" />
+    <Content Include="Content\fonts\lato\lato-italic.eot" />
+    <Content Include="Content\fonts\lato\lato-italic.ttf" />
+    <Content Include="Content\fonts\lato\lato-italic.woff" />
+    <Content Include="Content\fonts\lato\lato-light.eot" />
+    <Content Include="Content\fonts\lato\lato-light.ttf" />
+    <Content Include="Content\fonts\lato\lato-light.woff" />
+    <Content Include="Content\fonts\lato\lato-regular.eot" />
+    <Content Include="Content\fonts\lato\lato-regular.ttf" />
+    <Content Include="Content\fonts\lato\lato-regular.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -215,6 +240,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ours\allover.js" />
+    <Content Include="Scripts\ours\components.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -260,6 +287,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\fonts\glyphicons\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using ITTWEB_Opg1_AdminModul.Models;
-using Microsoft.Owin.Security.Google;
 
 namespace ITTWEB_Opg1_AdminModul.Controllers
 {

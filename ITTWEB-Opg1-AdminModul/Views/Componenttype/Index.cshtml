@@ -1,24 +1,21 @@
-﻿
-@model List<ITTWEB_Opg1_AdminModul.Models.ComponentType>
+﻿@model List<ITTWEB_Opg1_AdminModul.Models.ComponentType>
 
-    @{
-        Layout = "~/Views/Shared/_Layout.cshtml";
-        ViewBag.Title = "Komponenter";
-    }
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Komponenter";
+}
 
+<div>
+    <h2>Komponenter typer</h2>
+</div>
 
+<div class="add-wrapper">
+    <p>
+        <a href="https://www.google.com/search?q=tilf%C3%B8j&ie=utf-8&oe=utf-8">Add</a>
+    </p>
+</div>
 
-    <div class="jumbotron">
-        <h2>Komponenter typer</h2>
-    </div>
-
-    <div class="col-sm-3">
-        <p>
-            <b>Tilføj ny type:</b>
-            <a href="https://www.google.com/search?q=tilf%C3%B8j&ie=utf-8&oe=utf-8">ADD</a>
-        </p>
-
-    </div>
+<div class="div-table">
     <table class="table">
         <thead>
             <tr>
@@ -30,22 +27,20 @@
                 <th>Manufacturer</th>
                 <th>Antal</th>
             </tr>
-
         </thead>
         <tbody>
-
             @{
                 foreach (var component in Model)
                 {
                     <tr>
                         <td>
-                           <img class="ComponentTypeImage" src="@component.LocalImageUrl" />
+                            <img class="component-type-image" src="@component.LocalImageUrl" />
                         </td>
                         <td>@component.ComponentName</td>
-                        <td>@component.ComponentInfo</td>   
+                        <td>@component.ComponentInfo</td>
                         <td>@component.Category.CategoryName</td>
-                        <td><a href="@component.Datasheet"/>LINK</td>
-                        <td><a href="@component.ManufacturerLink"/>LINK</td>
+                        <td><a href="@component.Datasheet"></a>LINK</td>
+                        <td><a href="@component.ManufacturerLink"></a>LINK</td>
                         <td>//TOTO link til search i komponenter</td>
                         <td><a href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8">EDIT</a></td>
                         <td><a href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8#q=remove">REMOVE</a></td>
@@ -53,5 +48,5 @@
                 }
             }
         </tbody>
-
     </table>
+</div>
