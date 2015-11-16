@@ -1,0 +1,66 @@
+﻿@model ITTWEB_Opg1_AdminModul.Models.LoanInformation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LoanInformation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Student.MobilNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.MobilNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoanDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoanDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReturnDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsEmailSend)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsEmailSend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsReservation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsReservation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReservationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReservationDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
