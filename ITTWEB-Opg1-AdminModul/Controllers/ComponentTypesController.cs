@@ -44,8 +44,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(
-            [Bind(Include = "Id,ComponentName,ComponentInfo,Datasheet,LocalImageUrl,ManufacturerLink,CategoryId")] ComponentType componentType)
+        public ActionResult Create([Bind(Include = "Id,ComponentName,ComponentInfo,Datasheet,LocalImageUrl,ManufacturerLink,CategoryId")] ComponentType componentType)
         {
             if (ModelState.IsValid)
             {
