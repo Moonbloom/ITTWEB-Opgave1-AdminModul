@@ -181,7 +181,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoanInformationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DBUpdater.cs" />
     <Compile Include="EsDbContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -200,13 +199,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\flat\flat-ui.css" />
-    <Content Include="Content\mydata.css">
-      <DependentUpon>mydata.scss</DependentUpon>
+    <Content Include="Content\Site.css">
+      <DependentUpon>Site.scss</DependentUpon>
     </Content>
-    <Content Include="Content\mydata.min.css">
-      <DependentUpon>mydata.css</DependentUpon>
+    <Content Include="Content\Site.min.css">
+      <DependentUpon>Site.css</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -217,7 +215,6 @@
     <Content Include="Content\fonts\lato\lato-light.svg" />
     <Content Include="Content\fonts\lato\lato-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\fonts\lato\lato-black.eot" />
@@ -238,11 +235,11 @@
     <Content Include="Content\fonts\lato\lato-regular.eot" />
     <Content Include="Content\fonts\lato\lato-regular.ttf" />
     <Content Include="Content\fonts\lato\lato-regular.woff" />
-    <Content Include="Content\mydata.scss" />
     <None Include="compilerconfig.json" />
     <Content Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </Content>
+    <Content Include="Content\Site.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -290,7 +287,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Account\ShowAccounts.cshtml" />
     <Content Include="Views\Components\Create.cshtml" />
     <Content Include="Views\Components\Delete.cshtml" />
@@ -312,6 +308,7 @@
     <Content Include="Views\Students\Details.cshtml" />
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\Shared\LeftNavBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
