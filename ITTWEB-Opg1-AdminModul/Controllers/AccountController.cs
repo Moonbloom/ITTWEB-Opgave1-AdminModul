@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -485,10 +486,18 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         public ActionResult ShowAccounts()
         {
           List<ApplicationUser> users = _usersContext.Users.ToList();
-          return View(users);
+          List<EnrichendUser> UsersWithRoles = new List<EnrichendUser>();
+          foreach (var applicationUser in users)
+          {
+            var userWithRoles = new EnrichendUser();
+            userWithRoles.AppUser = applicationUser;
+            userWithRoles.Roles = UserManager.GetRoles(applicationUser.Id);
+            UsersWithRoles.Add(userWithRoles);
+          }
+
+
+          return View(UsersWithRoles);
         }
 
     }
-
-
 }

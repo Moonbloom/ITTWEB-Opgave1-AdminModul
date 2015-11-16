@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -63,6 +66,21 @@ namespace ITTWEB_Opg1_AdminModul
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+          //Creating Admin role if not created
+          var context = new ApplicationDbContext();  
+
+          var AdminExist = context.Roles.Any(r => r.Name.Equals("Admin", StringComparison.CurrentCultureIgnoreCase));
+          if (!AdminExist)
+          {
+            context.Roles.Add(new IdentityRole()
+            {
+              Name = "Admin"
+            });
+            context.SaveChanges();
+          }
+           
+
         }
     }
 }

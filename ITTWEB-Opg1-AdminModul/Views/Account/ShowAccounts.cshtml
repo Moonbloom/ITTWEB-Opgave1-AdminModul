@@ -1,5 +1,5 @@
-﻿@using ITTWEB_Opg1_AdminModul.Models
-@model List<ITTWEB_Opg1_AdminModul.Models.ApplicationUser>
+﻿@using ITTWEB_Opg1_AdminModul.Controllers
+@model List<EnrichendUser>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,11 +27,11 @@
         </thead>
         <tbody>
             @{
-                foreach (ApplicationUser user in Model)
+                foreach (EnrichendUser user in Model)
                 {
                     <tr>
-                        <td>@user.UserName</td>
-                        <td>User, Admin</td>
+                        <td>@user.AppUser.UserName</td>
+                        <td>@string.Join(", ", user.Roles.ToArray())</td>
                         <td><a class="component-edit" href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8">Edit</a></td>
                         <td><a class="component-remove" href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8#q=remove">Remove</a></td>
                     </tr>
