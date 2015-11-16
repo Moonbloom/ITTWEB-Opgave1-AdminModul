@@ -1,44 +1,39 @@
-﻿
-@using ITTWEB_Opg1_AdminModul.Models
-@model List<EnrichendUser>
+﻿@model IEnumerable<ITTWEB_Opg1_AdminModul.Models.ApplicationUser>
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Accounts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Accounts</h2>
 
-<div>
-    <h2>Accounts</h2>
-</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Roles)
+        </th>
+        <th></th>
+    </tr>
 
-<div class="add-wrapper">
-    <p>
-        <a href="https://www.google.com/search?q=tilf%C3%B8j&ie=utf-8&oe=utf-8">Add</a>
-    </p>
-</div>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => user.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Roles)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = user.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = user.Id }) |*@
+                @Html.ActionLink("Delete", "Delete", new { id = user.Id })
+            </td>
+        </tr>
+    }
 
-<div class="div-table">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Brugernavn</th>
-                <th>Roller</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                foreach (EnrichendUser user in Model)
-                {
-                    <tr>
-                        <td>@user.AppUser.UserName</td>
-                        <td>@string.Join(", ", user.Roles.ToArray())</td>
-                        <td><a class="component-edit" href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8">Edit</a></td>
-                        <td><a class="component-remove" href="https://www.google.com/search?q=edit&ie=utf-8&oe=utf-8#q=remove">Remove</a></td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
-</div>
+</table>
 

@@ -181,7 +181,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoanInformationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DBUpdater.cs" />
     <Compile Include="EsDbContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -291,16 +290,15 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
-    <Content Include="Views\Account\ShowAccounts.cshtml" />
     <Content Include="Views\Components\Create.cshtml" />
     <Content Include="Views\Components\Delete.cshtml" />
     <Content Include="Views\Components\Details.cshtml" />
     <Content Include="Views\Components\Edit.cshtml" />
     <Content Include="Views\Components\Index.cshtml" />
     <Content Include="Views\ComponentTypes\Create.cshtml" />
-    <Content Include="Views\ComponentTypes\Delete.cshtml" />
-    <Content Include="Views\ComponentTypes\Details.cshtml" />
-    <Content Include="Views\ComponentTypes\Edit.cshtml" />
+    <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\ComponentTypes\Index.cshtml" />
     <Content Include="Views\LoanInformations\Create.cshtml" />
     <Content Include="Views\LoanInformations\Delete.cshtml" />
@@ -312,6 +310,7 @@
     <Content Include="Views\Students\Details.cshtml" />
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\Account\ShowAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

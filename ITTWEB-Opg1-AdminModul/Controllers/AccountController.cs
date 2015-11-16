@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -485,24 +486,59 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
     public ActionResult ShowAccounts()
     {
       List<ApplicationUser> users = _usersContext.Users.ToList();
-      List<EnrichendUser> UsersWithRoles = new List<EnrichendUser>();
-   
-      foreach (var applicationUser in users)
+
+      return View(users);
+    }
+
+    // GET: Account/Delete/5
+    public ActionResult Delete(string id)
+    {
+      if (id == null)
       {
-        var userWithRoles = new EnrichendUser();
-        userWithRoles.AppUser = applicationUser;
-        userWithRoles.Roles = UserManager.GetRoles(applicationUser.Id);
-        UsersWithRoles.Add(userWithRoles);
+        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
+      var user = _usersContext.Users.Find(id);
+      if (user == null)
+      {
+        return HttpNotFound();
+      }
+      return View(user);
+    }
+    // POST: Components/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public ActionResult DeleteConfirmed(string id)
+    {
+      var User = _usersContext.Users.Find(id);
+      _usersContext.Users.Remove(User);
+      _usersContext.SaveChanges();
+      return RedirectToAction("ShowAccounts");
+    }
 
 
-      return View(UsersWithRoles);
+
+    private IEnumerable<string> GetRoles(string userId)
+    {
+      return UserManager.GetRoles(userId);
     }
 
     public void AddAccToRole(string UserName, string RoleName)
     {
       ApplicationUser user = _usersContext.Users.FirstOrDefault(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase));
       UserManager.AddToRole(user.Id, RoleName);
+    }
+
+    public string RemoveRole(string UserName, string RoleName)
+    {
+      var account = new AccountController();
+      var user = _userManager.Users.FirstOrDefault(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase));
+
+      if (account.UserManager.IsInRole(user.Id, RoleName))
+      {
+        account.UserManager.RemoveFromRole(user.Id, RoleName);
+        return "Role removed from this user successfully !";
+      }
+      return "Error";
     }
 
 
