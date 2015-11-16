@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ITTWEB_Opg1_AdminModul.Models.ComponentType>
+
+@{
+    ViewBag.Title = "Component types";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComponentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComponentInfo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Datasheet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalImageUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManufacturerLink)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ComponentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ComponentInfo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Datasheet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocalImageUrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ManufacturerLink)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

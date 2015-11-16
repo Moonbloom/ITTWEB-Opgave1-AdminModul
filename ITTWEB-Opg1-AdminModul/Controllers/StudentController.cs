@@ -14,7 +14,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         new Student()
         {
             Email = "Nope@nopemail.com",
-            MobilNo = "666",
+            MobilNo = "88888888",
             StudentName = "Poul",
             StudentId = "1",    
         }
