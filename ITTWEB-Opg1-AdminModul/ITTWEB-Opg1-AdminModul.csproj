@@ -199,14 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\flat\flat-ui.css" />
-    <Content Include="Content\mydata.css">
-      <DependentUpon>mydata.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\mydata.min.css">
-      <DependentUpon>mydata.css</DependentUpon>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\lato\lato-black.svg" />
@@ -237,7 +230,6 @@
     <Content Include="Content\fonts\lato\lato-regular.eot" />
     <Content Include="Content\fonts\lato\lato-regular.ttf" />
     <Content Include="Content\fonts\lato\lato-regular.woff" />
-    <Content Include="Content\mydata.scss" />
     <None Include="compilerconfig.json" />
     <Content Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
