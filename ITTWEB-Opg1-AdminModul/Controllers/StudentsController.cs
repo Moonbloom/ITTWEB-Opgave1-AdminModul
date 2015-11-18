@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
-using ITTWEB_Opg1_AdminModul;
+using ITTWEB_Opg1_AdminModul.DAL;
 using ITTWEB_Opg1_AdminModul.Models;
 
 namespace ITTWEB_Opg1_AdminModul.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class StudentsController : Controller
     {
-        private EsDbContext db = new EsDbContext();
+        private readonly EsDbManager _esDbManager = new EsDbManager();
 
         // GET: Students
         public ActionResult Index()
         {
-            return View(db.Students.ToList());
+            return View(_esDbManager.GetAllStudents());
         }
 
         // GET: Students/Details/5
@@ -28,7 +23,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            var student = _esDbManager.GetStudent(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -47,12 +42,12 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,MobilNo,StudentId,StudentName,Email,LoanInformationId")] Student student)
+        public ActionResult Create(
+            [Bind(Include = "Id,MobilNo,StudentId,StudentName,Email,LoanInformationId")] Student student)
         {
             if (ModelState.IsValid)
             {
-                db.Students.Add(student);
-                db.SaveChanges();
+                _esDbManager.CreateStudent(student);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +61,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            var student = _esDbManager.GetStudent(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -79,12 +74,12 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,MobilNo,StudentId,StudentName,Email,LoanInformationId")] Student student)
+        public ActionResult Edit(
+            [Bind(Include = "Id,MobilNo,StudentId,StudentName,Email,LoanInformationId")] Student student)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(student).State = EntityState.Modified;
-                db.SaveChanges();
+                _esDbManager.UpdateStudent(student);
                 return RedirectToAction("Index");
             }
             return View(student);
@@ -97,7 +92,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            var student = _esDbManager.GetStudent(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -110,19 +105,8 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student student = db.Students.Find(id);
-            db.Students.Remove(student);
-            db.SaveChanges();
+            _esDbManager.DeleteStudent(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

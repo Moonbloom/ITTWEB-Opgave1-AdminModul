@@ -1,7 +1,7 @@
 using System.Data.Entity;
 using ITTWEB_Opg1_AdminModul.Models;
 
-namespace ITTWEB_Opg1_AdminModul
+namespace ITTWEB_Opg1_AdminModul.DAL
 {
     public class EsDbContext : DbContext
     {
@@ -10,7 +10,7 @@ namespace ITTWEB_Opg1_AdminModul
             Database.SetInitializer(new EsDbInitializer());
         }
 
-        public class EsDbInitializer : DropCreateDatabaseAlways<EsDbContext> //DropCreateDatabaseAlways<OdenseTimeRegApiContext>
+        public class EsDbInitializer : CreateDatabaseIfNotExists<EsDbContext> //DropCreateDatabaseAlways<OdenseTimeRegApiContext>
         {
             protected override void Seed(EsDbContext context)
             {

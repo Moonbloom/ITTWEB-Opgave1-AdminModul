@@ -2,18 +2,20 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using ITTWEB_Opg1_AdminModul.DAL;
 using ITTWEB_Opg1_AdminModul.Models;
 
 namespace ITTWEB_Opg1_AdminModul.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class LoanInformationsController : Controller
     {
-        private readonly EsDbContext _db = new EsDbContext();
+        private readonly EsDbManager _esDbManager = new EsDbManager();
 
         // GET: LoanInformations
         public ActionResult Index()
         {
-            var loanInformations = _db.LoanInformations.Include(l => l.Student);
+            var loanInformations = _esDbManager.GetAllLoanInformation();
             return View(loanInformations.ToList());
         }
 
@@ -24,7 +26,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var loanInformation = _db.LoanInformations.Find(id);
+            var loanInformation = _esDbManager.GetLoanInformation(id);
             if (loanInformation == null)
             {
                 return HttpNotFound();
@@ -35,7 +37,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         // GET: LoanInformations/Create
         public ActionResult Create()
         {
-            ViewBag.StudentId = new SelectList(_db.Students, "Id", "MobilNo");
+            ViewBag.StudentId = new SelectList(_esDbManager.GetStudents(), "Id", "MobilNo");
             return View();
         }
 
@@ -44,16 +46,16 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,LoanDate,ReturnDate,IsEmailSend,IsReservation,ReservationDate,StudentId")] LoanInformation loanInformation)
+        public ActionResult Create(
+            [Bind(Include = "Id,LoanDate,ReturnDate,IsEmailSend,IsReservation,ReservationDate,StudentId")] LoanInformation loanInformation)
         {
             if (ModelState.IsValid)
             {
-                _db.LoanInformations.Add(loanInformation);
-                _db.SaveChanges();
+                _esDbManager.CreateLoanInformation(loanInformation);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StudentId = new SelectList(_db.Students, "Id", "MobilNo", loanInformation.StudentId);
+            ViewBag.StudentId = new SelectList(_esDbManager.GetStudents(), "Id", "MobilNo", loanInformation.StudentId);
             return View(loanInformation);
         }
 
@@ -64,12 +66,12 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var loanInformation = _db.LoanInformations.Find(id);
+            var loanInformation = _esDbManager.GetLoanInformation(id);
             if (loanInformation == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.StudentId = new SelectList(_db.Students, "Id", "MobilNo", loanInformation.StudentId);
+            ViewBag.StudentId = new SelectList(_esDbManager.GetStudents(), "Id", "MobilNo", loanInformation.StudentId);
             return View(loanInformation);
         }
 
@@ -78,15 +80,15 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,LoanDate,ReturnDate,IsEmailSend,IsReservation,ReservationDate,StudentId")] LoanInformation loanInformation)
+        public ActionResult Edit(
+            [Bind(Include = "Id,LoanDate,ReturnDate,IsEmailSend,IsReservation,ReservationDate,StudentId")] LoanInformation loanInformation)
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(loanInformation).State = EntityState.Modified;
-                _db.SaveChanges();
+                _esDbManager.UpdateLoanInformation(loanInformation);
                 return RedirectToAction("Index");
             }
-            ViewBag.StudentId = new SelectList(_db.Students, "Id", "MobilNo", loanInformation.StudentId);
+            ViewBag.StudentId = new SelectList(_esDbManager.GetStudents(), "Id", "MobilNo", loanInformation.StudentId);
             return View(loanInformation);
         }
 
@@ -97,7 +99,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var loanInformation = _db.LoanInformations.Find(id);
+            var loanInformation = _esDbManager.GetLoanInformation(id);
             if (loanInformation == null)
             {
                 return HttpNotFound();
@@ -110,19 +112,8 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var loanInformation = _db.LoanInformations.Find(id);
-            _db.LoanInformations.Remove(loanInformation);
-            _db.SaveChanges();
+            _esDbManager.DeleteLoanInformation(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

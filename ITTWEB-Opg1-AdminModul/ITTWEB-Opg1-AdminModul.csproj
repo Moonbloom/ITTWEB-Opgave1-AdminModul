@@ -175,17 +175,23 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
-    <Compile Include="Models\EnrichendUser.cs" />
     <Compile Include="Controllers\ComponentsController.cs" />
     <Compile Include="Controllers\ComponentTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoanInformationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="DBUpdater.cs" />
-    <Compile Include="EsDbContext.cs" />
+    <Compile Include="DAL\AppDbManager.cs" />
+    <Compile Include="DAL\EsDbManager.cs" />
+    <Compile Include="DAL\DBUpdater.cs" />
+    <Compile Include="DAL\EsDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511101033523_InitialCreate.cs" />
+    <Compile Include="Migrations\201511101033523_InitialCreate.Designer.cs">
+      <DependentUpon>201511101033523_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Component.cs" />
     <Compile Include="Models\ComponentType.cs" />
@@ -198,8 +204,18 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-ITTWEB-Opg1-AdminModul-20151105094935.mdf" />
+    <Content Include="App_Data\aspnet-ITTWEB-Opg1-AdminModul-20151105094935_log.ldf">
+      <DependentUpon>aspnet-ITTWEB-Opg1-AdminModul-20151105094935.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\flat\flat-ui.css" />
+    <Content Include="Content\Site.css">
+      <DependentUpon>Site.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.min.css">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\lato\lato-black.svg" />
@@ -209,7 +225,6 @@
     <Content Include="Content\fonts\lato\lato-light.svg" />
     <Content Include="Content\fonts\lato\lato-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\fonts\lato\lato-black.eot" />
@@ -234,6 +249,7 @@
     <Content Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </Content>
+    <Content Include="Content\Site.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -243,8 +259,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\ours\allover.js" />
-    <Content Include="Scripts\ours\components.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -281,7 +295,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Components\Create.cshtml" />
     <Content Include="Views\Components\Delete.cshtml" />
     <Content Include="Views\Components\Details.cshtml" />
@@ -303,9 +316,12 @@
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
     <Content Include="Views\Account\ShowAccounts.cshtml" />
+    <Content Include="Views\ComponentTypes\Details.cshtml" />
+    <Content Include="Views\ComponentTypes\Delete.cshtml" />
+    <Content Include="Views\ComponentTypes\Edit.cshtml" />
+    <Content Include="Views\Shared\LeftNavBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\fonts\glyphicons\" />
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +330,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201511101033523_InitialCreate.resx">
+      <DependentUpon>201511101033523_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,66 @@
+﻿@model ITTWEB_Opg1_AdminModul.Models.ComponentType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>ComponentType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComponentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComponentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComponentInfo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComponentInfo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Datasheet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Datasheet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocalImageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocalImageUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ManufacturerLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ManufacturerLink)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

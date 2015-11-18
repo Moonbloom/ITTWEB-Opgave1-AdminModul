@@ -61,21 +61,18 @@ input, select, textarea {
 td {
   vertical-align: middle; }
 
-.email-is-send {
-  color: red; }
+.edit {
+  color: #16a085; }
+  .edit:hover {
+    color: #006f53; }
 
-.email-is-not-send {
-  color: limegreen; }
+.details {
+  color: #f0ad4e; }
+  .details:hover {
+    color: #bd7a1b; }
 
-.component-edit {
-  color: #16A085; }
-
-.component-edit:hover {
-  color: #5FA085; }
-
-.component-remove {
-  color: #E00000; }
-
-.component-remove:hover {
-  color: #FF0000; }
+.delete {
+  color: #ff0000; }
+  .delete:hover {
+    color: #cc0000; }
 

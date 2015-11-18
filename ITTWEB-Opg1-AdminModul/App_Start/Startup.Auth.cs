@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Owin;
 using ITTWEB_Opg1_AdminModul.Models;
 
@@ -37,7 +35,7 @@ namespace ITTWEB_Opg1_AdminModul
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -48,40 +46,35 @@ namespace ITTWEB_Opg1_AdminModul
             // This is similar to the RememberMe option when you log in.
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
-            // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            CreateRolesIfNeeded();
+        }
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
-
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
-
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
-
-          //Creating Admin role if not created
-          var context = new ApplicationDbContext();  
-
-          var AdminExist = context.Roles.Any(r => r.Name.Equals("Admin", StringComparison.CurrentCultureIgnoreCase));
-          if (!AdminExist)
-          {
-            context.Roles.Add(new IdentityRole()
+        private void CreateRolesIfNeeded()
+        {
+            using (var context = new ApplicationDbContext())
             {
-              Name = "Admin"
-            });
-            context.SaveChanges();
-          }
+                //Creating Admin role if not created
+                var adminExist = context.Roles.Any(r => r.Name.Equals("Admin", StringComparison.CurrentCultureIgnoreCase));
+                if (!adminExist)
+                {
+                    context.Roles.Add(new IdentityRole
+                    {
+                        Name = "Admin"
+                    });
+                }
 
+                //Creating User role if not created
+                var userExist = context.Roles.Any(r => r.Name.Equals("User", StringComparison.CurrentCultureIgnoreCase));
+                if (!userExist)
+                {
+                    context.Roles.Add(new IdentityRole
+                    {
+                        Name = "User"
+                    });
+                }
 
-
+                context.SaveChanges();
+            }
         }
     }
 }

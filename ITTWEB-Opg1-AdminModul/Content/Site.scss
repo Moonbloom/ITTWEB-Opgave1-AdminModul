@@ -1,4 +1,13 @@
-﻿body {
+﻿$lightgreen: #16a085;
+$darkgreen: #006f53;
+
+$lightyellow: #f0ad4e;
+$darkyellow: #bd7a1b;
+
+$lightred: #ff0000;
+$darkred: #cc0000;
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -87,26 +96,26 @@ td {
     vertical-align: middle;
 }
 
-.email-is-send {
-    color: red;
+.edit {
+    color: $lightgreen;
+
+    &:hover {
+        color: $darkgreen;
+    }
 }
 
-.email-is-not-send {
-    color: limegreen;
+.details {
+    color: $lightyellow;
+
+    &:hover {
+        color: $darkyellow;
+    }
 }
 
-.component-edit {
-    color: #16A085;
-}
+.delete {
+    color: $lightred;
 
-.component-edit:hover {
-    color: #5FA085;
-}
-
-.component-remove {
-    color: #E00000;
-}
-
-.component-remove:hover {
-    color: #FF0000;
+    &:hover {
+        color: $darkred;
+    }
 }

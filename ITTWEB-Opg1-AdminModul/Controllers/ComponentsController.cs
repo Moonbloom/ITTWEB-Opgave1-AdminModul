@@ -1,19 +1,20 @@
-﻿using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using ITTWEB_Opg1_AdminModul.DAL;
 using ITTWEB_Opg1_AdminModul.Models;
 
 namespace ITTWEB_Opg1_AdminModul.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ComponentsController : Controller
     {
-        private readonly EsDbContext _db = new EsDbContext();
+        private readonly EsDbManager _esDbManager = new EsDbManager();
 
         // GET: Components
         public ActionResult Index()
         {
-            var components = _db.Components.Include(c => c.ComponentType).Include(c => c.LoanInformation);
+            var components = _esDbManager.GetAllComponents();
             return View(components.ToList());
         }
 
@@ -24,7 +25,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var component = _db.Components.Find(id);
+            var component = _esDbManager.GetComponent(id);
             if (component == null)
             {
                 return HttpNotFound();
@@ -35,8 +36,8 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         // GET: Components/Create
         public ActionResult Create()
         {
-            ViewBag.ComponentTypeId = new SelectList(_db.ComponentTypes, "Id", "ComponentName");
-            ViewBag.LoanInformationId = new SelectList(_db.LoanInformations, "Id", "Id");
+            ViewBag.ComponentTypeId = new SelectList(_esDbManager.GetComponentTypes(), "Id", "ComponentName");
+            ViewBag.LoanInformationId = new SelectList(_esDbManager.GetLoanInformations(), "Id", "Id");
             return View();
         }
 
@@ -45,17 +46,17 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ComponentNumber,SerieNr,AdminComment,UserComment,ComponentTypeId,LoanInformationId")] Component component)
+        public ActionResult Create(
+            [Bind(Include = "Id,ComponentNumber,SerieNr,AdminComment,UserComment,ComponentTypeId,LoanInformationId")] Component component)
         {
             if (ModelState.IsValid)
             {
-                _db.Components.Add(component);
-                _db.SaveChanges();
+                _esDbManager.CreateComponent(component);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ComponentTypeId = new SelectList(_db.ComponentTypes, "Id", "ComponentName", component.ComponentTypeId);
-            ViewBag.LoanInformationId = new SelectList(_db.LoanInformations, "Id", "Id", component.LoanInformationId);
+            ViewBag.ComponentTypeId = new SelectList(_esDbManager.GetComponentTypes(), "Id", "ComponentName", component.ComponentTypeId);
+            ViewBag.LoanInformationId = new SelectList(_esDbManager.GetLoanInformations(), "Id", "Id", component.LoanInformationId);
             return View(component);
         }
 
@@ -66,13 +67,14 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var component = _db.Components.Find(id);
+            var component = _esDbManager.GetComponent(id);
             if (component == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ComponentTypeId = new SelectList(_db.ComponentTypes, "Id", "ComponentName", component.ComponentTypeId);
-            ViewBag.LoanInformationId = new SelectList(_db.LoanInformations, "Id", "Id", component.LoanInformationId);
+            ViewBag.ComponentTypeId = new SelectList(_esDbManager.GetComponentTypes(), "Id", "ComponentName",
+                component.ComponentTypeId);
+            ViewBag.LoanInformationId = new SelectList(_esDbManager.GetLoanInformations(), "Id", "Id", component.LoanInformationId);
             return View(component);
         }
 
@@ -81,16 +83,16 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ComponentNumber,SerieNr,AdminComment,UserComment,ComponentTypeId,LoanInformationId")] Component component)
+        public ActionResult Edit(
+            [Bind(Include = "Id,ComponentNumber,SerieNr,AdminComment,UserComment,ComponentTypeId,LoanInformationId")] Component component)
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(component).State = EntityState.Modified;
-                _db.SaveChanges();
+                _esDbManager.UpdateComponent(component);
                 return RedirectToAction("Index");
             }
-            ViewBag.ComponentTypeId = new SelectList(_db.ComponentTypes, "Id", "ComponentName", component.ComponentTypeId);
-            ViewBag.LoanInformationId = new SelectList(_db.LoanInformations, "Id", "Id", component.LoanInformationId);
+            ViewBag.ComponentTypeId = new SelectList(_esDbManager.GetComponentTypes(), "Id", "ComponentName", component.ComponentTypeId);
+            ViewBag.LoanInformationId = new SelectList(_esDbManager.GetLoanInformations(), "Id", "Id", component.LoanInformationId);
             return View(component);
         }
 
@@ -101,7 +103,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var component = _db.Components.Find(id);
+            var component = _esDbManager.GetComponent(id);
             if (component == null)
             {
                 return HttpNotFound();
@@ -114,19 +116,8 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var component = _db.Components.Find(id);
-            _db.Components.Remove(component);
-            _db.SaveChanges();
+            _esDbManager.DeleteComponent(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

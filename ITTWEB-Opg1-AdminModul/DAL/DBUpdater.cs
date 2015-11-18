@@ -1,7 +1,7 @@
 ﻿using System;
 using ITTWEB_Opg1_AdminModul.Models;
 
-namespace ITTWEB_Opg1_AdminModul
+namespace ITTWEB_Opg1_AdminModul.DAL
 {
     public class DbUpdater
     {
@@ -9,32 +9,32 @@ namespace ITTWEB_Opg1_AdminModul
         {
             var category1 = new Category
             {
-                CategoryName = "Cat Category"
+                CategoryName = "Cameras"
             };
             context.Categories.Add(category1);
 
             var comType1 = new ComponentType
             {
-                ComponentName = "namey namey",
+                ComponentName = "Camera",
                 CategoryId = category1.Id
             };
             context.ComponentTypes.Add(comType1);
 
             var com1 = new Component
             {
-                ComponentNumber = 1337,
+                ComponentNumber = 14,
                 ComponentTypeId = comType1.Id,
-                SerieNr = "1337",
-                UserComment = "this product sux",
-                AdminComment = "admin comment",
+                SerieNr = "983234-EB",
+                UserComment = "Great camera!",
+                AdminComment = "Need to buy more of these",
             };
             context.Components.Add(com1);
 
             var student1 = new Student
             {
-                Email = "Nope@gmail.com",
+                Email = "peter@leasy.com",
                 MobilNo = "88888888",
-                StudentName = "Per",
+                StudentName = "Leasy",
                 StudentId = "201012345",
             };
             context.Students.Add(student1);

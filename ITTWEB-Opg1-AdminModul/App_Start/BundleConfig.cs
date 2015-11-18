@@ -22,12 +22,6 @@ namespace ITTWEB_Opg1_AdminModul
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/allover").Include(
-                    "~/Scripts/ours/allover.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/components").Include(
-                      "~/Scripts/ours/ours/components.js"));
-
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/flat/flat-ui.css",

@@ -2,18 +2,20 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using ITTWEB_Opg1_AdminModul.DAL;
 using ITTWEB_Opg1_AdminModul.Models;
 
 namespace ITTWEB_Opg1_AdminModul.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ComponentTypesController : Controller
     {
-        private readonly EsDbContext _db = new EsDbContext();
+        private readonly EsDbManager _esDbManager = new EsDbManager();
 
         // GET: ComponentTypes
         public ActionResult Index()
         {
-            var componentTypes = _db.ComponentTypes.Include(c => c.Category);
+            var componentTypes = _esDbManager.GetAllComponentTypes();
             return View(componentTypes.ToList());
         }
 
@@ -24,7 +26,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var componentType = _db.ComponentTypes.Find(id);
+            var componentType = _esDbManager.GetComponentType(id);
             if (componentType == null)
             {
                 return HttpNotFound();
@@ -35,7 +37,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         // GET: ComponentTypes/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(_db.Categories, "Id", "CategoryName");
+            ViewBag.CategoryId = new SelectList(_esDbManager.GetCategories(), "Id", "CategoryName");
             return View();
         }
 
@@ -44,16 +46,16 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ComponentName,ComponentInfo,Datasheet,LocalImageUrl,ManufacturerLink,CategoryId")] ComponentType componentType)
+        public ActionResult Create(
+            [Bind(Include = "Id,ComponentName,ComponentInfo,Datasheet,LocalImageUrl,ManufacturerLink,CategoryId")] ComponentType componentType)
         {
             if (ModelState.IsValid)
             {
-                _db.ComponentTypes.Add(componentType);
-                _db.SaveChanges();
+                _esDbManager.CreateComponentType(componentType);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(_db.Categories, "Id", "CategoryName", componentType.CategoryId);
+            ViewBag.CategoryId = new SelectList(_esDbManager.GetCategories(), "Id", "CategoryName", componentType.CategoryId);
             return View(componentType);
         }
 
@@ -64,12 +66,12 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var componentType = _db.ComponentTypes.Find(id);
+            var componentType = _esDbManager.GetComponentType(id);
             if (componentType == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(_db.Categories, "Id", "CategoryName", componentType.CategoryId);
+            ViewBag.CategoryId = new SelectList(_esDbManager.GetCategories(), "Id", "CategoryName", componentType.CategoryId);
             return View(componentType);
         }
 
@@ -83,11 +85,10 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(componentType).State = EntityState.Modified;
-                _db.SaveChanges();
+                _esDbManager.UpdateComponentType(componentType);
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(_db.Categories, "Id", "CategoryName", componentType.CategoryId);
+            ViewBag.CategoryId = new SelectList(_esDbManager.GetCategories(), "Id", "CategoryName", componentType.CategoryId);
             return View(componentType);
         }
 
@@ -98,7 +99,7 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var componentType = _db.ComponentTypes.Find(id);
+            var componentType = _esDbManager.GetComponentType(id);
             if (componentType == null)
             {
                 return HttpNotFound();
@@ -111,19 +112,8 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var componentType = _db.ComponentTypes.Find(id);
-            _db.ComponentTypes.Remove(componentType);
-            _db.SaveChanges();
+            _esDbManager.DeleteComponentType(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
