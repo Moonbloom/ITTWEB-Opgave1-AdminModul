@@ -20,16 +20,16 @@
 
     @foreach (var user in Model)
     {
-        <tr>
+        <tr>    
             <td>
                 @Html.DisplayFor(modelItem => user.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => user.Roles)
+                @Html.DisplayFor(modelItem => user.RoleName)
             </td>
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id = user.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = user.Id }) |*@
+                @Html.ActionLink("Edit", "Edit", new { id = user.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = user.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = user.Id })
             </td>
         </tr>

@@ -175,7 +175,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
-    <Compile Include="Models\EnrichendUser.cs" />
     <Compile Include="Controllers\ComponentsController.cs" />
     <Compile Include="Controllers\ComponentTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -186,6 +185,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511101033523_InitialCreate.cs" />
+    <Compile Include="Migrations\201511101033523_InitialCreate.Designer.cs">
+      <DependentUpon>201511101033523_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Component.cs" />
     <Compile Include="Models\ComponentType.cs" />
@@ -198,6 +202,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-ITTWEB-Opg1-AdminModul-20151105094935.mdf" />
+    <Content Include="App_Data\aspnet-ITTWEB-Opg1-AdminModul-20151105094935_log.ldf">
+      <DependentUpon>aspnet-ITTWEB-Opg1-AdminModul-20151105094935.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\flat\flat-ui.css" />
@@ -313,7 +321,6 @@
     <Content Include="Views\Account\ShowAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\fonts\glyphicons\" />
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +329,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201511101033523_InitialCreate.resx">
+      <DependentUpon>201511101033523_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

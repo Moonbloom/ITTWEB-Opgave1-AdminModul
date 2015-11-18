@@ -68,7 +68,7 @@ namespace ITTWEB_Opg1_AdminModul
             //});
 
           //Creating Admin role if not created
-          var context = new ApplicationDbContext();  
+          var context = new ApplicationDbContext();
 
           var AdminExist = context.Roles.Any(r => r.Name.Equals("Admin", StringComparison.CurrentCultureIgnoreCase));
           if (!AdminExist)
@@ -77,11 +77,22 @@ namespace ITTWEB_Opg1_AdminModul
             {
               Name = "Admin"
             });
+          
             context.SaveChanges();
           }
+          var User = context.Roles.Any(r => r.Name.Equals("User", StringComparison.CurrentCultureIgnoreCase));
+          if (!User)
+          {
+            context.Roles.Add(new IdentityRole()
+            {
+              Name = "User"
+            });
 
-
-
+            context.SaveChanges();
+          }
+          
+          
+        
         }
     }
 }

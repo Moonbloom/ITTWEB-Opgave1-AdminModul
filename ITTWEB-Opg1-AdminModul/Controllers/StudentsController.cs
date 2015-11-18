@@ -11,6 +11,7 @@ using ITTWEB_Opg1_AdminModul.Models;
 
 namespace ITTWEB_Opg1_AdminModul.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class StudentsController : Controller
     {
         private EsDbContext db = new EsDbContext();

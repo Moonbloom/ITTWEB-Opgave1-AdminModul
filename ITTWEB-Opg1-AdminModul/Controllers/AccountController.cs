@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using ITTWEB_Opg1_AdminModul.Models;
 
 namespace ITTWEB_Opg1_AdminModul.Controllers
 {
-  [Authorize]
+    [Authorize(Roles = "Admin")]
   public class AccountController : Controller
   {
     private ApplicationSignInManager _signInManager;
@@ -487,6 +488,14 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
     {
       List<ApplicationUser> users = _usersContext.Users.ToList();
 
+      foreach (var SingleUser in users)
+      {
+        SingleUser.RoleName = GetRole(SingleUser.Id);
+      }
+      
+      ApplicationUser user = _usersContext.Users.FirstOrDefault(w => w.UserName == "chr.sorensen1990@gmail.com ");
+      UserManager.AddToRole(user.Id, "Admin");
+
       return View(users);
     }
 
@@ -502,9 +511,10 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
       {
         return HttpNotFound();
       }
+      user.RoleName = GetRole(user.Id);
       return View(user);
     }
-    // POST: Components/Delete/5
+    // POST: Account/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public ActionResult DeleteConfirmed(string id)
@@ -514,31 +524,77 @@ namespace ITTWEB_Opg1_AdminModul.Controllers
       _usersContext.SaveChanges();
       return RedirectToAction("ShowAccounts");
     }
-
-
-
-    private IEnumerable<string> GetRoles(string userId)
+    // GET: Account/Details/5
+    public ActionResult Details(string id)
     {
-      return UserManager.GetRoles(userId);
+      if (id == null)
+      {
+        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+      }
+      var user = _usersContext.Users.Find(id);
+      if (user == null)
+      {
+        return HttpNotFound();
+      }
+      user.RoleName = GetRole(user.Id);  
+      return View(user);
+    }
+
+    // GET: Account/Edit/5
+    public ActionResult Edit(string id)
+    {
+      if (id == null)
+      {
+        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+      }
+      var user = _usersContext.Users.Find(id);
+     
+      if (user == null)
+      {
+        return HttpNotFound();
+      }
+      user.RoleName = GetRole(user.Id);
+      return View(user);
+    }
+
+    // POST: Account/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Edit([Bind(Include = "Id,UserName,RoleName")] ApplicationUser user)
+    {
+      if (ModelState.IsValid)
+      {
+        var realRoleName = _usersContext.Roles.FirstOrDefault(role => role.Id == user.RoleName).Name;
+        AddAccToRole(user.UserName,realRoleName);
+        
+       // _usersContext.Entry(user).State = EntityState.Modified;
+      //  _usersContext.SaveChanges();
+        return RedirectToAction("ShowAccounts");
+      }
+      return View(user);
+    }
+
+
+    private string GetRole(string userId)
+    {
+      return UserManager.GetRoles(userId).FirstOrDefault();
     }
 
     public void AddAccToRole(string UserName, string RoleName)
     {
       ApplicationUser user = _usersContext.Users.FirstOrDefault(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase));
+      UserManager.RemoveFromRoles(user.Id, new[] {"Admin", "User"});;
       UserManager.AddToRole(user.Id, RoleName);
     }
 
-    public string RemoveRole(string UserName, string RoleName)
+    public void RemoveRole(string UserName, string RoleName)
     {
-      var account = new AccountController();
       var user = _userManager.Users.FirstOrDefault(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase));
 
-      if (account.UserManager.IsInRole(user.Id, RoleName))
+      if (UserManager.IsInRole(user.Id, RoleName))
       {
-        account.UserManager.RemoveFromRole(user.Id, RoleName);
-        return "Role removed from this user successfully !";
+        UserManager.RemoveFromRole(user.Id, RoleName);
       }
-      return "Error";
     }
 
 

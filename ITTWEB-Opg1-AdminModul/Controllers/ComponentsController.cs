@@ -6,6 +6,7 @@ using ITTWEB_Opg1_AdminModul.Models;
 
 namespace ITTWEB_Opg1_AdminModul.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ComponentsController : Controller
     {
         private readonly EsDbContext _db = new EsDbContext();

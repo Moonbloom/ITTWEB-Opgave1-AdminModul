@@ -10,7 +10,6 @@ using ITTWEB_Opg1_AdminModul.Models;
 
 namespace ITTWEB_Opg1_AdminModul.Controllers
 {
-    [Authorize]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
